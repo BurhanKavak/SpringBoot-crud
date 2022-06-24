@@ -9,4 +9,5 @@ public interface IUserService {
   public List<User> getAll();
   public User getById(long id);
   public String delete(long id);
+  public String update (long id,User user);
 }

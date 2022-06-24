@@ -12,7 +12,7 @@ import java.util.List;
 public class UserExceptionHandler {
     ErrorResponse errorResponse;
 
-    @ExceptionHandler(UserNotNullException.class)
+  /*  @ExceptionHandler(UserNotNullException.class)
     public ResponseEntity<?> userNotNull (UserNotNullException userNotNullException){
         List<String> detail = new ArrayList<>();
         detail.add(userNotNullException.getMessage());
@@ -20,7 +20,7 @@ public class UserExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
      }
-
+*/
      @ExceptionHandler(UserNotFoundException.class)
      public ResponseEntity<?> userNotFound (UserNotFoundException userNotFoundException){
         List<String> detail = new ArrayList<>();

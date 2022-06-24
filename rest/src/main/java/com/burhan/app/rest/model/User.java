@@ -6,13 +6,9 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+
+@Data
 @Entity
 @Table(name = "user")
 public class User {
@@ -20,7 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank(message = "İsim null olamaz!")
+    @NotBlank(message = "İsim boş bırakılamaz!!")
     @Column(name = "first_name")
     private String firstName;
 
@@ -32,16 +28,13 @@ public class User {
     @Column(name = "email")
     private String email;
 
+
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
     }
 
     public void setFirstName(String firstName) {
@@ -63,4 +56,10 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+
 }

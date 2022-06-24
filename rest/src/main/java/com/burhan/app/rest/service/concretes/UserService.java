@@ -17,10 +17,7 @@ public class UserService implements IUserService {
     private UserRepository repository;
 
     @Override
-    public User save(User user) {
-        if (user.getFirstName().isBlank() || user.getFirstName().isEmpty()){
-            throw new UserNotNullException("User name must be not null");
-        }
+    public User save(User user) { // Burada if koşulları ile hatayı kontrol etmek yerine Validation kullanarak hatayı gösterebiliriz.
         return repository.save(user);
     }
 
@@ -41,9 +38,23 @@ public class UserService implements IUserService {
     public String delete(long id) {
         Optional<User> optionalUser = repository.findById(id);
         if (optionalUser.isEmpty()){
-            throw new UserNotFoundException("User id"+id);
+            throw new UserNotFoundException("User id :" + id);
         }
         repository.deleteById(id);
         return "Başarıyla Silindi";
+    }
+
+    @Override
+    public String update(long id,User user) {
+        Optional<User> optionalUser = repository.findById(id);
+        if (optionalUser.isEmpty()){
+            throw new UserNotFoundException("User id :" + id);
+        }
+        User oldUser = getById(id);
+        oldUser.setLastName(user.getLastName());
+        oldUser.setFirstName(user.getFirstName());
+        oldUser.setEmail(user.getEmail());
+        repository.save(oldUser);
+        return "Başarıyla Güncellendi";
     }
 }

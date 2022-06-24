@@ -35,7 +35,14 @@ public class UserController {
         return new ResponseEntity<User>(getId,HttpStatus.OK);
     }
 
-    @DeleteMapping("{id}")
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateUserById (@PathVariable("id") long id,@RequestBody User user){
+        String message = service.update(id,user);
+        return new ResponseEntity<String>(message,HttpStatus.OK);
+    }
+
+
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete (@PathVariable("id") long id){
         String message = service.delete(id);
         return new ResponseEntity<String>(message,HttpStatus.ACCEPTED);
