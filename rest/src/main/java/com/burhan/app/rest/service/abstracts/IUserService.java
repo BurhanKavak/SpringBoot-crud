@@ -3,6 +3,7 @@ package com.burhan.app.rest.service.abstracts;
 import com.burhan.app.rest.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUserService {
   public User save(User user);

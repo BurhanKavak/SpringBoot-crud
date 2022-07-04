@@ -28,4 +28,12 @@ public class UserExceptionHandler {
         errorResponse = new ErrorResponse("Kullanıcı Bulunamadı",detail);
         return new ResponseEntity<>(errorResponse,HttpStatus.BAD_REQUEST);
      }
+
+     @ExceptionHandler(UserAlreadyExistException.class)
+    public ResponseEntity<?> userAlreadyExist (UserAlreadyExistException userAlreadyExistException){
+        List<String> detail = new ArrayList<>();
+        detail.add(userAlreadyExistException.getMessage());
+        errorResponse = new ErrorResponse("Kullanıcı Mevcut!",detail);
+        return new ResponseEntity<>(errorResponse,HttpStatus.ALREADY_REPORTED);
+    }
 }

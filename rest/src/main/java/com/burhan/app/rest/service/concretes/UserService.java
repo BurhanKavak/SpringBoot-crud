@@ -1,7 +1,7 @@
 package com.burhan.app.rest.service.concretes;
 
+import com.burhan.app.rest.exception.UserAlreadyExistException;
 import com.burhan.app.rest.exception.UserNotFoundException;
-import com.burhan.app.rest.exception.UserNotNullException;
 import com.burhan.app.rest.model.User;
 import com.burhan.app.rest.repository.UserRepository;
 import com.burhan.app.rest.service.abstracts.IUserService;
@@ -17,7 +17,11 @@ public class UserService implements IUserService {
     private UserRepository repository;
 
     @Override
-    public User save(User user) { // Burada if koşulları ile hatayı kontrol etmek yerine Validation kullanarak hatayı gösterebiliriz.
+    public User save(User user){
+        if (repository.getByFirstName(user.getFirstName()).isPresent() && repository.getByLastName(user.getLastName()).isPresent()&&
+        repository.getByEmail(user.getEmail()).isPresent()){
+            throw new UserAlreadyExistException("İsim,soyisim ve email farklı girmeniz gerekmektedir!");
+        }
         return repository.save(user);
     }
 
