@@ -18,7 +18,7 @@ public class UserService implements IUserService {
 
     @Override
     public User save(User user){
-        if (repository.getByFirstName(user.getFirstName()).isPresent() && repository.getByLastName(user.getLastName()).isPresent()&&
+        if (repository.getByFirstName(user.getFirstName()).isPresent() || repository.getByLastName(user.getLastName()).isPresent()||
         repository.getByEmail(user.getEmail()).isPresent()){
             throw new UserAlreadyExistException("İsim,soyisim ve email farklı girmeniz gerekmektedir!");
         }
